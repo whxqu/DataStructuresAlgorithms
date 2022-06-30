@@ -404,7 +404,7 @@ class TreeNode:
 		while nodes_to_visit:
 			current_node = nodes_to_visit.pop()
 			print(current_node.value)
-			nodes_to_visit += current_node.children)
+			nodes_to_visit += current_node.children
 
 from collections import deque
 def bfs(root_node, goal_value):
@@ -422,16 +422,16 @@ def bfs(root_node, goal_value):
 			new_path = current_path[:]
 			new_path.append(child)
 			path_queue.appendleft(new_path)
-	print("This path does not exist!)
+	print("This path does not exist!")
 
 def dfs(root_node, goal_value, path = ()):
 	path = path + (root_node,)
 	if root_node.value == goal_value:
-	      for node in path:
-	      		print(node.value)
+		for node in path:
+			print(node.value)
 	for child in root_node.children:
-	      path_found = dfs(child, goal_value, path)
-	      if path_found is not None:
-	      		return path_found
+		path_found = dfs(child, goal_value, path)
+		if path_found is not None:
+			return path_found
 	return None
 	   
