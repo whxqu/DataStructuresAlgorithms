@@ -434,4 +434,15 @@ def dfs(root_node, goal_value, path = ()):
 		if path_found is not None:
 			return path_found
 	return None
-	   
+
+def recursive_binary_search(sorted_lst, left_pointer, right_pointer, target):
+	if left_pointer >= right_pointer:
+		return "Value not found"
+	middle_idx = (left_pointer + right_pointer) // 2
+	middle_value = sorted_lst[middle_idx]
+	if middle_value == target:
+		return middle_idx
+	if middle_value > target:
+		return recursive_binary_search(sorted_lst, left_pointer, middle_idx, target)
+	if middle_value < target:
+		return recursive_binary_search(sorted_lst, middle_idx + 1, right_pointer, target)
