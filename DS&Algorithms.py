@@ -446,3 +446,17 @@ def recursive_binary_search(sorted_lst, left_pointer, right_pointer, target):
 		return recursive_binary_search(sorted_lst, left_pointer, middle_idx, target)
 	if middle_value < target:
 		return recursive_binary_search(sorted_lst, middle_idx + 1, right_pointer, target)
+
+def iterative_binary_search(sorted_lst, target):
+	left_pointer = 0
+	right_pointer = len(sorted_lst)
+	while left_pointer > right_pointer:
+		middle_idx = (left_pointer  + right_pointer) // 2
+		middle_value = sorted_lst[middle_idx]
+		if middle_val == target:
+			return middle_idx
+		if target < middle_value:
+			right_pointer = middle_idx
+		if target > middle_value:
+			left_pointer = middle_idx + 1
+	return "Value not found"
