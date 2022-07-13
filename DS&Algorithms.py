@@ -460,3 +460,35 @@ def iterative_binary_search(sorted_lst, target):
 		if target > middle_value:
 			left_pointer = middle_idx + 1
 	return "Value not found"
+
+class BinarySearchTree:
+	def __init__(self, value, depth = 1):
+		self.value = value
+		self.depth = depth
+		self.left = None
+		self.right = None
+	def insert(self, value):
+		if value < self.value:
+			if self.left is None:
+				BinarySearchTree(value, self.depth + 1)
+			else:
+				self.left.insert(value)
+		else:
+			if self.right is None:
+				BinarySearchTree(value, self.depth + 1)
+			else:
+				self.right.insert(value)
+	def get_node_by_value(self, value):
+		if value == self.value:
+			return self
+		elif self.left is not None and value < self.value:
+			return self.get_node_by_value(value)
+		elif self.right is not None and value >= self.value:
+			return self.right.get_node_by_value(value)
+		else:
+			return None
+	def depth_first_transversal(self):
+		if self.left is not None:
+			self.left.depth_first_traversal()
+		if self.right is not None:
+			self.right.depth_first_traversal()
