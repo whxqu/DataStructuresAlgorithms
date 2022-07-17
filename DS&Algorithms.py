@@ -470,19 +470,19 @@ class BinarySearchTree:
 	def insert(self, value):
 		if value < self.value:
 			if self.left is None:
-				BinarySearchTree(value, self.depth + 1)
+				self.left = BinarySearchTree(value, self.depth + 1)
 			else:
 				self.left.insert(value)
 		else:
 			if self.right is None:
-				BinarySearchTree(value, self.depth + 1)
+				self.right = BinarySearchTree(value, self.depth + 1)
 			else:
 				self.right.insert(value)
 	def get_node_by_value(self, value):
 		if value == self.value:
 			return self
 		elif self.left is not None and value < self.value:
-			return self.get_node_by_value(value)
+			return self.left.get_node_by_value(value)
 		elif self.right is not None and value >= self.value:
 			return self.right.get_node_by_value(value)
 		else:
