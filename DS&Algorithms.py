@@ -493,3 +493,27 @@ class BinarySearchTree:
 		print(f"Value: {self.value}, Depth: {self.depth}")
 		if self.right is not None:
 			self.right.depth_first_traversal()
+
+class MaxHeap:
+	def __init__(self):
+		self.heap_list = [None]
+		self.count = 0
+	def parent_idx(self, idx):
+		return idx // 2
+	def left_child_idx(self, idx):
+		return idx * 2
+	def right_child_idx(self, idx):
+		return idx * 2 + 1
+	def add(self, element):
+		self.heap_list.append(element)
+		self.count += 1
+		self.heapify()
+	def heapify(self):
+		idx = self.count
+		while self.parent_idx(idx) > 0:
+			child = self.heap_list[idx]
+			parent = self.heap_list[self.parent_idx(idx)]
+			if parent < child:
+				child = self.heap_list[self.parent_idx(idx)]
+				parent = self.heap_list[idx]
+			idx = self.parent_idx(idx)
