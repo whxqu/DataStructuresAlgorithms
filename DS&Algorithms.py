@@ -504,7 +504,7 @@ class MaxHeap:
 		return idx * 2
 	def right_child_idx(self, idx):
 		return idx * 2 + 1
-	def child_present(self, idx):
+	def	child_present(self, idx):
 		return self.left_child_idx(idx) <= self.count
 	def add(self, element):
 		self.heap_list.append(element)
@@ -516,10 +516,10 @@ class MaxHeap:
 			child = self.heap_list[idx]
 			parent = self.heap_list[self.parent_idx(idx)]
 			if parent < child:
-				child = self.heap_list[self.parent_idx(idx)]
-				parent = self.heap_list[idx]
+				self.heap_list[idx] = parent
+				self.heap_list[self.parent_idx(idx)] = child
 			idx = self.parent_idx(idx)
-	def retrieve_max_value(self):
+	def retrieve_max(self):
 		if self.count == 0:
 			print("This heap is empty!")
 			return None
@@ -529,7 +529,7 @@ class MaxHeap:
 		self.heap_list.pop()
 		self.heapify_down()
 		return max_value
-	def get_larger_child(self, idx):
+	def get_larger_child_idx(self, idx):
 		if self.right_child_idx(idx) > self.count:
 			return self.left_child_idx(idx)
 		else:
@@ -542,18 +542,20 @@ class MaxHeap:
 	def heapify_down(self):
 		idx = 1
 		while self.child_present(idx):
-			larger_child_idx = self.get_larger_child(idx)
+			larger_child_idx = self.get_larger_child_idx(idx)
 			child = self.heap_list[larger_child_idx]
 			parent = self.heap_list[idx]
 			if parent < child:
-				child = self.heap_list[idx]
-				parent = self.heap_list[larger_child_idx]
+				self.heap_list[larger_child_idx] = parent
+				self.heap_list[idx] = child
 			idx = larger_child_idx
 
 def heap_sort(lst):
 	sort = []
 	max_heap = MaxHeap()
 	for idx in lst:
-		max_value = max_heap.retrieve_max_value()
+		max_heap.add(idx)
+	while max_heap.count > 0:
+		max_value = max_heap.retrieve_max()
 		sort.insert(0, max_value)
 	return sort
